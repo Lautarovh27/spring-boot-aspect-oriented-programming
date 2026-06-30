@@ -1,20 +1,23 @@
 package com.springboot.app.aop.springboot_aop.controllers;
 
+import com.springboot.app.aop.springboot_aop.services.GreetingService;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Collections;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+
+
+import java.util.Collections;
 
 
 
 @RestController
 public class GreetingController {
 
+    private GreetingService greetingService;
+
     @GetMapping("/greeting")
     public ResponseEntity<?> greeting() {
-        return ResponseEntity.ok(Collections.singletonMap("Hello, World!", null));
+        return ResponseEntity.ok(Collections.singletonMap("greeting", greetingService.sayHello("World", "Hello")));
     }
 }
     
