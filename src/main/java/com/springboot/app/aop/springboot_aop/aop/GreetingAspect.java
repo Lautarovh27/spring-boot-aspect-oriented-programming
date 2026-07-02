@@ -3,9 +3,11 @@ package com.springboot.app.aop.springboot_aop.aop;
 import java.util.Arrays;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -61,6 +63,29 @@ public class GreetingAspect {
         logger.info(
             "Después de lanzar excepción: " + method + " con argumentos: " + args
         );
+    }
+
+    @Around("execution(* com.springboot.app.aop.springboot_aop.services.*.*(..))")
+    public Object loggerAround(ProceedingJoinPoint joinPoint) throws Throwable {
+
+        String method = joinPoint.getSignature().getName();
+        String args = Arrays.toString(joinPoint.getArgs());
+
+        Object result = null;
+        try {
+            logger.info(
+                "Alrededor: " + method + " con argumentos: " + args
+            );
+            result = joinPoint.proceed();
+            logger.info(
+                "Alrededor: " + method + " y resultado: " + result
+            );
+            return result;
+        } catch (Throwable e) {
+            logger.error("Error en el método: " + method +"()");
+            throw e;
+        }
+        
     }
 
 }
