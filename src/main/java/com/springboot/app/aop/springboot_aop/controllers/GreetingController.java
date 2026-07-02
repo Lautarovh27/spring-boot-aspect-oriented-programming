@@ -19,7 +19,7 @@ public class GreetingController {
 
     @GetMapping("/greeting")
     public ResponseEntity<?> greeting() {
-        return ResponseEntity.ok(Collections.singletonMap("greeting", greetingService.sayHello("World", "Hello")));
+        return ResponseEntity.ok(Collections.singletonMap("greeting", greetingService.sayHello("Lautaro ", "Hola qué tal?")));
     }
 }
     

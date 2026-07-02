@@ -13,12 +13,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class GreetingAspect {
 
-    private Logger logger = LoggerFactory.getLogger(GreetingAspect.class);
 
-    @Before("execution(* com.springboot.app.aop.springboot_aop.services;GreetingService.sayHello(..))")
-    public void logBeforeGreeting(JoinPoint joinPoint) {
-        String method = joinPoint.getSignature().getName();
-        String args = Arrays.toString(joinPoint.getArgs());
-        logger.info("Greeting method called with name: {"+method+"} and phrase: {"+args+"}",  method, args);
-    }
+private Logger logger = LoggerFactory.getLogger(GreetingAspect.class);
+
+@Before("execution(* com.springboot.app.aop.springboot_aop.services.GreetingService.sayHello(..))")
+public void logBeforeGreeting(JoinPoint joinPoint) {
+
+    String method = joinPoint.getSignature().getName();
+    String args = Arrays.toString(joinPoint.getArgs());
+
+    logger.info(
+        "Antes: " + method + " con argumentos: " + args
+    );
+}
+
+
 }
