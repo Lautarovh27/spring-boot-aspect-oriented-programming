@@ -12,8 +12,11 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+
+@Order(2)
 @Aspect
 @Component
 public class GreetingAspect {
@@ -28,7 +31,7 @@ public class GreetingAspect {
         String args = Arrays.toString(joinPoint.getArgs());
 
         logger.info(
-            "Antes: " + method + " con argumentos: " + args
+            "Antes2: " + method + " con argumentos: " + args
         );
     }
 
@@ -39,7 +42,7 @@ public class GreetingAspect {
         String args = Arrays.toString(joinPoint.getArgs());
 
         logger.info(
-            "Después: " + method + " con argumentos: " + args
+            "Después2: " + method + " con argumentos: " + args
         );
     }
 
